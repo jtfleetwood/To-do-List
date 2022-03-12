@@ -1,24 +1,41 @@
 import logo from './logo.svg';
 import './App.css';
+import InputForm from './InputForm.jsx'
+import React, { useState } from 'react';
+import { useEffect } from 'react';
+import Tasks from './Tasks.jsx';
+import Task from './Task';
+import PageHolder from './PageHolder.jsx';
+
+
 
 function App() {
+  
+  const [appTasks, setTasks] = useState([])
+  const addTask = (title1, id1, location1) => {
+  
+    setTasks([...appTasks, {task: title1, date: id1, priority: location1}]);
+
+  }
+
+  useEffect(()=> {
+    const data = JSON.parse(localStorage.getItem("app-tasks"));
+    setTasks(data);
+
+  },[]);
+
+
+  useEffect(()=> {
+    localStorage.setItem("app-tasks", JSON.stringify(appTasks));
+  }, [appTasks]);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <PageHolder onAdd = {addTask} appTasks = {appTasks}></PageHolder>
+
+    </>
+    
   );
 }
 
