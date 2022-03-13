@@ -3,10 +3,14 @@ import './App.css';
 import Tasks from './Tasks';
 import Form from './InputForm';
 
+
+
 const PageHolder = (props) => {
+
+    
+
     return (
         
-    
         <>
         <head>
                 <meta charSet="utf-8"/>
@@ -32,7 +36,12 @@ const PageHolder = (props) => {
                 </div>
                 <div className="pl-1 pt-1 h-auto  text-green-200 font-mono text-xs bg-black" id="console">
                     <Form onAdd = {props.onAdd}></Form>
-                <Tasks tasks = {props.appTasks}/>
+                    
+                    <br/>
+                <Tasks tasks = {props.appTasks} deleteTasks = {props.deleteTasks} prepareDelete = {props.prepareDelete}/>
+                
+                <br/>
+                <br/>
                 </div>
             </div> 
             </div>

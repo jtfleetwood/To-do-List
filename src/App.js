@@ -12,10 +12,35 @@ import PageHolder from './PageHolder.jsx';
 function App() {
   
   const [appTasks, setTasks] = useState([])
+  const [elemToDelete, setDelete] = useState([])
   const addTask = (title1, id1, location1) => {
-  
-    setTasks([...appTasks, {task: title1, date: id1, priority: location1}]);
+    var id = {
+      task: title1,
+      date: id1,
+      priority: location1
+    }
 
+    setTasks([...appTasks, {task: title1, date: id1, priority: location1, id: id}]);
+
+  }
+
+  const prepareDelete = (index, reverse) => {
+    if (!elemToDelete.includes(index)) {
+      setDelete([...elemToDelete, index]);
+    }
+
+    else {
+      if (reverse) {
+        setDelete(elemToDelete.filter((i) => i != index));
+      }
+    }
+    
+  }
+
+  const deleteTasks = () => {
+    setTasks(appTasks.filter((task) => !elemToDelete.includes(task.id)));
+    setDelete([]);
+    window.location.reload(false);
   }
 
   useEffect(()=> {
@@ -24,15 +49,20 @@ function App() {
 
   },[]);
 
+  useEffect(()=> {
+    setDelete([]);
+
+  },[]);
 
   useEffect(()=> {
     localStorage.setItem("app-tasks", JSON.stringify(appTasks));
   }, [appTasks]);
 
 
+
   return (
     <>
-      <PageHolder onAdd = {addTask} appTasks = {appTasks}></PageHolder>
+      <PageHolder onAdd = {addTask} deleteTasks = {deleteTasks} prepareDelete = {prepareDelete} appTasks = {appTasks}></PageHolder>
 
     </>
     

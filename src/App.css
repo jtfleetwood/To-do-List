@@ -40,3 +40,20 @@
     transform: rotate(360deg);
   }
 }
+
+.taskStyle {
+  fontWeight: bold;
+  width: 100%;
+
+}
+
+
+.checkBoxLabel {
+  position : absolute;
+  left : 65%;
+  textAlign: center;
+}
+
+.checkBoxLabel:hover {
+  cursor: pointer;
+}

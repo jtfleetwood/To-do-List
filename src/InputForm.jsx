@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Tasks from './Tasks';
 
-const Form = ({onAdd}) => {
+const Form = (props) => {
 
     const [title1, setTitle] = useState('');
     const [id1, setId] = useState('');
@@ -9,13 +9,13 @@ const Form = ({onAdd}) => {
 
     const onSubmit = (e) => {
         e.preventDefault()
-
+        
         if (!title1 || !id1 || !location1) {
             alert("Please fill out all available fields.");
         }
 
         else {
-            onAdd(String(title1), String(id1), String(location1));
+            props.onAdd(String(title1), String(id1), String(location1));
 
             setTitle('');
             setId('');
@@ -32,6 +32,7 @@ const Form = ({onAdd}) => {
                 Task: $&nbsp;
                 <input style ={{backgroundColor : "#000"}} type="text" name="Title of Task: " value = {title1} onChange = {(e) =>  setTitle(e.target.value)}/>
                 </label>
+                
                 <div/>
                 <br/>
                 <label>
